@@ -1,13 +1,8 @@
-# Use an official Python runtime as a parent image
-FROM python:3.8-slim
-
-# Set the working directory in the container
-WORKDIR /app
-
-RUN pip install pytest
-
-# Copy the current directory contents into the container at /app
-COPY . /app
-
-# Run the script
-CMD ["python", "Student1.py"]
+FROM python:3.14.0
+WORKDIR /Student1
+COPY . .
+RUN pip install --no-cache-dir pytest
+# Run tests at build time (CI)
+RUN pytest
+# FIXED entrypoint (never replaced)
+ENTRYPOINT ["python", "Student1.py"]
